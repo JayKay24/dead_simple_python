@@ -1,0 +1,30 @@
+[flake8]
+# Exclude directories that do not contain project source code
+# (especially critical since your virtual environment is at the root of the project)
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    bin,
+    include,
+    lib,
+    lib64,
+    share,
+    venv,
+    .venv,
+    env,
+    .env
+
+# Match standard line-length settings (88 is the modern default for Black formatter compatibility)
+max-line-length = 88
+
+# Common warnings/errors to ignore:
+# E203: Whitespace before ':' (conflicts with Black formatter)
+# W503: Line break before binary operator (conflicts with PEP8/Black updates)
+extend-ignore = E203, W503
+
+# Output options
+show-source = True
+statistics = True
+count = True
