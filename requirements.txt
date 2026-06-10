@@ -4,6 +4,7 @@ pycodestyle==2.14.0
 pyflakes==3.4.0
 mccabe==0.7.0
 autopep8==2.3.2
+mypy==2.1.0
 
 # Async Console Input
 aioconsole==0.8.1
