@@ -1,8 +1,10 @@
 from cafequeue import CafeQueue
 
+
 def brew(order):
-  print(f"Making {order}")
-  return order
+    print(f"Making {order}")
+    return order
+
 
 queue = CafeQueue()
 queue.add_customer('Newman', 'tea', 'tea', 'tea', 'tea', to_go=False)
@@ -15,8 +17,9 @@ print('Glen' in queue)
 print('Kyle' in queue)
 
 for customer, orders, to_go in queue:
-  for order in orders: brew(order)
-  if to_go:
-    print(f"Order for {customer}!")
-  else:
-    print(f"Takes order to {customer}")
+    for order in orders:
+        brew(order)
+    if to_go:
+        print(f"Order for {customer}!")
+    else:
+        print(f"Takes order to {customer}")
