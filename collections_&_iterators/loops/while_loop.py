@@ -3,11 +3,14 @@ def main():
 
   while number is None:
     try:
-      number = int(input("Enter a number: "))
+      raw = input("Enter a number ('q' to quit): ")
+      if raw == "q":
+        break
+      number = int(raw)
     except ValueError:
       print("You must enter a number.")
-
-  print(f"You entered {number}")
+  else:
+    print(f"You entered {number}")
 
 if __name__ == "__main__":
   main()
