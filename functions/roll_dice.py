@@ -10,6 +10,12 @@ def roll_dice_recursive(*dice: tuple[int, ...]) -> tuple[int, ...]:
   
   return ()
 
+def roll_dice_keyword_only(*, sides=6, dice=1):
+  return tuple(random.randint(1, sides) for _ in range(dice))
+
+def roll_dice_positional_only(dice=1, sides=6, /):
+  return tuple(random.randint(1, sides) for _ in range(dice))
+
 def cup_of_dice():
   dice_cup = roll_dice_recursive(6, 6, 6, 6, 6)
   print(dice_cup)
@@ -31,5 +37,11 @@ def players():
 def main():
   # players()
   cup_of_dice()
+  # try:
+  #   # roll_dice_keyword_only(3, sides=2, dice=2)
+  #   # roll_dice_positional_only(sides=4, dice=4)
+  # except TypeError:
+  #   # print("Only keyword arguments accepted")
+  #   print("Only positional arguments accepted")
 if __name__ == "__main__":
   main()
