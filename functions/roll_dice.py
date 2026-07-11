@@ -1,6 +1,6 @@
 import random
 
-def roll_dice(sides: int, dice: int) -> tuple[int, int]:
+def roll_dice(sides: int, dice=1) -> tuple[int, ...]:
   return tuple(random.randint(1, sides) for _ in range(dice))
 
 def roll_dice_recursive(sides: int, dice: int) -> tuple[int, ...]:
@@ -13,7 +13,8 @@ def roll_dice_recursive(sides: int, dice: int) -> tuple[int, ...]:
 def main():
   print("Roll for initiative...")
   max_val = 20
-  player1, player2 = roll_dice_recursive(max_val, 2)
+  player1, player2 = roll_dice(max_val, 2)
+  player3, = roll_dice(max_val)
   
   if player1 >= player2:
     print(f"Player 1 goes first (rolled {player1}).")
