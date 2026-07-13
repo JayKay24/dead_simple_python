@@ -19,6 +19,12 @@ def roll_dice_keyword_only(*, sides=6, dice=1):
 def roll_dice_positional_only(dice=1, sides=6, /):
   return tuple(random.randint(1, sides) for _ in range(dice))
 
+def make_dice_cup(sides=6, dice=5):
+  def roll():
+    return tuple(random.randint(1, sides) for _ in range(dice))
+  
+  return roll
+
 def cup_of_dice():
   dice_cup = roll_dice_recursive(6, 6)
   print(dice_cup)
@@ -38,13 +44,8 @@ def players():
     print(f"Player 2 goes first (rolled {player2}).")
 
 def main():
-  # players()
-  cup_of_dice()
-  # try:
-  #   # roll_dice_keyword_only(3, sides=2, dice=2)
-  #   # roll_dice_positional_only(sides=4, dice=4)
-  # except TypeError:
-  #   # print("Only keyword arguments accepted")
-  #   print("Only positional arguments accepted")
+  roll_for_damage = make_dice_cup(sides=8, dice=5)
+  damage = roll_for_damage()
+  print(damage)
 if __name__ == "__main__":
   main()
