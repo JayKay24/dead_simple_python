@@ -3,10 +3,13 @@ import random
 def roll_dice(*dice: tuple[int, ...]) -> tuple[int, ...]:
   return tuple(random.randint(1, d) for d in dice)
 
-def roll_dice_recursive(*dice: tuple[int, ...]) -> tuple[int, ...]:
-  if dice:
-    roll = random.randint(1, dice[0])
-    return (roll,) + roll_dice_recursive(*dice[1:])
+def roll_dice_recursive(sides=6, dice=1) -> tuple[int, ...]:
+  def roll():
+    return random.randint(1, sides)
+
+  if dice < 1:
+    return ()
+  return (roll(),) + roll_dice_recursive(*dice[1:])
   
   return ()
 
@@ -17,7 +20,7 @@ def roll_dice_positional_only(dice=1, sides=6, /):
   return tuple(random.randint(1, sides) for _ in range(dice))
 
 def cup_of_dice():
-  dice_cup = roll_dice_recursive(6, 6, 6, 6, 6)
+  dice_cup = roll_dice_recursive(6, 6)
   print(dice_cup)
 
   bunch_o_dice = roll_dice(20, 6, 8, 4)
