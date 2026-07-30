@@ -28,9 +28,10 @@ class Notification_Context:
   """
   Context class that uses a Notification_Strategy to send notifications.
   This allows changing the notification mechanism at runtime.
+  A strategy can be provided at initialization or set later.
   """
-  def __init__(self, strategy: Notification_Strategy) -> None:
-    """Initialize the context with a specific strategy."""
+  def __init__(self, strategy: Notification_Strategy | None = None) -> None:
+    """Initialize the context with an optional strategy."""
     self._strategy = strategy
   
   def set_strategy(self, strategy: Notification_Strategy) -> None:
@@ -38,8 +39,9 @@ class Notification_Context:
     self._strategy = strategy
       
   def notify(self, recipient: str) -> None:
-    """Delegate the notification task to the current strategy."""
-    self._strategy.notify(recipient)
+    """Delegate the notification task to the current strategy, if one is set."""
+    if self._strategy:
+      self._strategy.notify(recipient)
         
 if __name__ == "__main__":
   # Initialize the context with the Email strategy and send a notification
