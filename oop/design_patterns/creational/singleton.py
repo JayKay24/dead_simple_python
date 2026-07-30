@@ -12,8 +12,9 @@ class Notification_Service:
   @classmethod
   def obtain_context(cls) -> Notification_Context:
     """
-    Returns the singleton instance of Notification_Context.
-    Creates it if it doesn't already exist.
+    Returns the singleton Notification_Context instance, creating it if necessary.
+    Uses double-checked locking with a class-level Lock to guarantee that only one
+    instance is ever created, even when called concurrently from multiple threads.
     """
     if cls._notification_context is None:
       with cls._lock:
