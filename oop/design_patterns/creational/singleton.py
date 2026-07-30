@@ -29,18 +29,15 @@ def main():
   """
   # Lock to ensure thread-safe access when changing the shared context's strategy
   lock = threading.Lock()
-  notification_service = Notification_Service()
 
   def notify(strategy: Notification_Strategy, recipient: str) -> None:
     """
     Helper function to send a notification using a specific strategy.
     Uses a lock to prevent race conditions when updating the singleton's strategy.
     """
-    nonlocal notification_service
-
     with lock:
       # Obtain the singleton context, update its strategy, and send the notification
-      context = notification_service.obtain_context()
+      context = Notification_Service.obtain_context()
       context.set_strategy(strategy)
       context.notify(recipient)
 
