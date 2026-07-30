@@ -7,6 +7,7 @@ class Notification_Service:
   Ensures that only one context is created and shared across the application.
   """
   _notification_context: Notification_Context | None = None
+  _lock = threading.Lock()
 
   @classmethod
   def obtain_context(cls) -> Notification_Context:
@@ -15,7 +16,9 @@ class Notification_Service:
     Creates it if it doesn't already exist.
     """
     if cls._notification_context is None:
-      cls._notification_context = Notification_Context()
+      with cls._lock:
+        if cls._notification_context is None:
+          cls._notification_context = Notification_Context()
     
     return cls._notification_context
 
