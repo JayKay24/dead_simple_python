@@ -1,7 +1,7 @@
-from .interface_segragation import Worker, Human, Robot
+from interface_segragation import Worker, Human, Robot
 
 class Manager:
-  def assign_work(worker: Worker, duration: int, item: str) -> None:
+  def assign_work(self, worker: Worker, duration: int, item: str) -> None:
     worker.work(duration, item)
 
 def main():
