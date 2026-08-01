@@ -2,7 +2,8 @@ from typing import Protocol
 
 class Worker(Protocol):
   """Interface for entities that can work."""
-  def work(self, duration: int) -> None:
+  def work(self, duration: int, item: str) -> None:
+    """Perform work on the given item for the specified duration."""
     ...
 
 class Sleeper(Protocol):
@@ -31,8 +32,8 @@ class Human(HumanWorker):
   def __init__(self, name: str) -> None:
     self.name = name
 
-  def work(self, duration: int) -> None:
-    print(f"{self.name} is working for the next {duration} hours...")
+  def work(self, duration: int, item: str) -> None:
+    print(f"{self.name} is working on {item} for the next {duration} hours...")
 
   def sleep(self, duration: int) -> None:
     print(f"{self.name} is sleeping for the next {duration} hours...")
@@ -48,8 +49,8 @@ class Robot(RobotWorker):
   def __init__(self, name: str) -> None:
     self.name = name
 
-  def work(self, duration: int) -> None:
-    print(f"{self.name} is working for the next {duration} hours...")
+  def work(self, duration: int, item: str) -> None:
+    print(f"{self.name} is working on {item} for the next {duration} hours...")
 
 def main():
   """
@@ -61,11 +62,11 @@ def main():
   
   # A human worker performs all activities
   dave_worker.eat(15)
-  dave_worker.work(8)
+  dave_worker.work(8, "reports")
   dave_worker.sleep(8)
   
   # A robot worker only performs work
-  i_worker.work(20)
+  i_worker.work(20, "car assembly")
 
 if __name__ == "__main__":
   main()
